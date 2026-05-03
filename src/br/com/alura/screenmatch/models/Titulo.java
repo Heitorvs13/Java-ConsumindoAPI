@@ -1,6 +1,7 @@
-package br.com.alura.screenmatch.modelos;
+package br.com.alura.screenmatch.models;
 
 public class Titulo implements Comparable<Titulo> {
+
     private String nome;
     private int anoDeLancamento;
     private boolean incluidoNoPlano;
@@ -11,6 +12,14 @@ public class Titulo implements Comparable<Titulo> {
     public Titulo(String nome, int anoDeLancamento) {
         this.nome = nome;
         this.anoDeLancamento = anoDeLancamento;
+    }
+
+    public Titulo(TituloOMDb tituloOMDb){
+        this.nome = tituloOMDb.title();
+        this.anoDeLancamento = Integer.parseInt(tituloOMDb.year());
+
+        String duracaoString  = tituloOMDb.runtime().split(" ")[0];
+        this.duracaoEmMinutos = Integer.parseInt(duracaoString);
     }
 
     public String getNome() {
@@ -61,6 +70,15 @@ public class Titulo implements Comparable<Titulo> {
 
     public double pegaMedia(){
         return somaDasAvaliacoes / totalDeAvaliacoes;
+    }
+
+    @Override
+    public String toString() {
+        return "Titulo{" +
+                "nome='" + nome + '\'' +
+                ", anoDeLancamento=" + anoDeLancamento +
+                ", duracaoEmMinutos=" + duracaoEmMinutos +
+                '}';
     }
 
     @Override
